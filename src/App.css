@@ -1,38 +1,100 @@
-.App {
+
+.full-screen{
+  display: flex;
+  justify-content: center;
+  height: 240px;
+}
+
+.logo{
+  color: black;
+  font-size: 42px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bolder;
+  text-decoration: none;
+  text-decoration-color: none;
+}
+
+.lay-out{
+  width: 80%;
+}
+
+.top-nav{
+  text-align: right;
+  margin: 20px;
+  
+}
+.m-nav-t{
+  display: flex;
+  margin: auto;
+}
+
+.middle-nav{
+  
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black ;
+}
+
+.nav-text{
+  color: black;
+  text-decoration-color: none;
+  text-decoration: none;
+  margin: 10px;
+  display: inline-block;
+  border: none;
+  font-size: 16px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.nav-text-m{
+  text-decoration: none;
+  text-decoration-color: none;
+  margin: auto 0;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+
+}
+.nav-border{
+  border-radius: 15px;
+  padding: 12px;
+  border: none;
+}
+.mystore{
+  color: white;
+  background-color: black;
+  border-radius: 15px;
+}
+
+.search-box{
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  margin: 14px auto;
+  width: 320px;
+  
+}
+.search-input{
+  width: 320px;
+  height: 36px;
+  border-radius: 26px;
+  outline:auto;
+  border-color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: large;
+}
+.search-btn{
+  position : absolute;
+  width: 28px;
+  height: 28px;
+  top: 7px;
+  right: 14px;
+  margin: 0;
+}
+.text-center{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

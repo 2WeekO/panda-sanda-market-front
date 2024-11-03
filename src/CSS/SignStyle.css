@@ -1,0 +1,68 @@
+.sign-view{
+  display: flex;
+  justify-content: center;
+  
+}
+.sign-layout{
+  text-align: center;
+  margin-top: 20px;
+
+}
+.sign-title{
+  font-size: 24px;
+  font-weight: bolder;
+  margin-top: 10px;
+}
+.input-box{
+  display: block;
+  width: 380px;
+  margin: 10px;
+  
+}
+.sign-text{
+  text-align: left;
+  margin: 5px;
+  font-size: 18px;
+}
+.sign-input{
+  margin: 8px 0;
+  width: 360px;
+  height: 34px;
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.596);
+  font-size: 16px;
+  padding-left: 10px;
+}
+.submit-btn{
+  width: 380px;
+  height: 42px;
+  margin: 20px 0;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+}
+.flex{
+  display: flex;
+}
+.check-btn{
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.596);
+  font-size: 16px;
+  margin: 8px 10px;
+  background-color: black;
+  color: white;
+
+}
+.check-input{
+  width: 240px;
+  height: 34px;
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.596);
+  font-size: 16px;
+  padding-left: 10px;
+  margin: 8px 0;
+}
