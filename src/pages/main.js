@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ProductItem from './Component/ProductItem'; 
 import { Link } from "react-router-dom";
+import ProductItem from './Component/ProductItem';
 
 function Main() {
   const [products, setProducts] = useState([]); // 상품 데이터를 위한 상태
@@ -10,7 +10,7 @@ function Main() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/product/all")
+      .get("https://pandasanda.shop/api/product/all")
       .then((response) => {
         setProducts(response.data); // 서버로부터 받은 상품 데이터를 상태에 저장
         setLoading(false);          // 로딩 상태를 false로 변경
