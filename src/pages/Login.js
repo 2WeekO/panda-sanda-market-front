@@ -17,7 +17,7 @@ const LoginPage = () => {
         const logindata = { email, password };
 
         try {
-            const res = await axios.post("http://121.173.211.228:8080/auth/login", logindata);
+            const res = await axios.post("http://localhost:8080/auth/login", logindata);
             const token = res.data.accessToken; // accessToken 호출
             const userKey = res.data.userKey; // userKey 호출 (응답에 포함되어 있어야 함)
 
