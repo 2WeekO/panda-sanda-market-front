@@ -43,7 +43,7 @@ const SignUpPage = () => {
         setLoading(true); // 로딩 시작
 
         try {
-            const res = await axios.post("http://pandasanda.shop:8080/auth/signup", data, {
+            const res = await axios.post("http://121.173.211.228:8080/auth/signup", data, {
                 headers: {
                     "Content-Type": "application/json", // JSON 데이터 형식
                     "Accept": "application/json", // 서버로부터 받을 데이터 형식
