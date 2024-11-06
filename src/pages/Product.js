@@ -104,7 +104,7 @@ const ProductForm = () => {
     formData.append('shippingMethod', shippingMethod);
 
     try {
-      const resProduct = await axios.post("http://localhost:8080/api/product/register", formData, {
+      const resProduct = await axios.post("http://172.30.1.66:8080/api/product/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`,
