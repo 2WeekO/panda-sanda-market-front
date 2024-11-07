@@ -104,7 +104,7 @@ const ProductForm = () => {
     formData.append('shippingMethod', shippingMethod);
 
     try {
-      const resProduct = await axios.post("http://pandasanda.shop:8080/api/product/register", formData, {
+      const resProduct = await axios.post("https://localhost:8080/api/product/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`,
