@@ -1,6 +1,6 @@
+import axios from "axios"; // axios를 가져옴
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Link 컴포넌트 가져오기
-import axios from "axios"; // axios를 가져옴
 
 const TopNavigation = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,7 +19,7 @@ const TopNavigation = () => {
 
     const fetchUserKey = async (token) => {
         try {
-            const response = await axios.get("http://localhost:8080/api/user/key", {
+            const response = await axios.get("https://localhost:8080/api/user/key", {
                 headers: {
                     Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 포함
                 },
