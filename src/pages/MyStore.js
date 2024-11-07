@@ -17,7 +17,7 @@ const MyStorePage = () => {
     }
 
     // userKey 가져오는 API 호출
-    axios.get('https://172.30.1.66:8080/api/user/key', {
+    axios.get('http://172.30.1.66:8080/api/user/key', {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
@@ -33,7 +33,7 @@ const MyStorePage = () => {
     if (userKey) {
       const token = localStorage.getItem('token');
 
-      axios.get(`https://172.30.1.66:8080/api/user/mystore/${userKey}`, {
+      axios.get(`http://172.30.1.66:8080/api/user/mystore/${userKey}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
