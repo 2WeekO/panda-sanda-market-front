@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-        target: 'http://121.173.211.228:8080',
+        target: 'http://pandasanda.shop:8080',
         changeOrigin: true,
         })
     );
