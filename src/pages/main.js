@@ -10,7 +10,7 @@ function Main() {
 
   useEffect(() => {
     axios
-      .get("http://172.30.1.66:8080/api/product/all")
+      .get("https://pandasanda.shop:8080/api/product/all")
       .then((response) => {
         setProducts(response.data); // 서버로부터 받은 상품 데이터를 상태에 저장
         setLoading(false);          // 로딩 상태를 false로 변경
