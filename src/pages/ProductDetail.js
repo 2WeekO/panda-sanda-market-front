@@ -12,7 +12,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product/${productId}`)
+      .get(`http://121.173.211.228:8080/api/product/${productId}`)
       .then((response) => {
         setProduct(response.data);
         setMainImage(response.data.images?.[0] || '/images/default.jpg'); // 초기 메인 이미지 설정
