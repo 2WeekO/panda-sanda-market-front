@@ -19,7 +19,7 @@ const TopNavigation = () => {
 
     const fetchUserKey = async (token) => {
         try {
-            const response = await axios.get("http://pandasanda.shop:8080/api/user/key", {
+            const response = await axios.get("https://pandasanda.shop/api/user/key", {
                 headers: {
                     Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 포함
                 },
