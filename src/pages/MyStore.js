@@ -17,7 +17,7 @@ const MyStorePage = () => {
     }
 
     // userKey 가져오는 API 호출
-    axios.get('http://localhost:8080/api/user/key', {
+    axios.get('http://pandasanda.shop:8080/api/user/key', {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
@@ -33,7 +33,7 @@ const MyStorePage = () => {
     if (userKey) {
       const token = localStorage.getItem('token');
 
-      axios.get(`http://localhost:8080/api/user/mystore/${userKey}`, {
+      axios.get(`http://pandasanda.shop:8080/api/user/mystore/${userKey}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
