@@ -1,13 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import ProductItem from './Component/ProductItem';
 
 const MyStorePage = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [products, setProducts] = useState([]);
   const [userKey, setUserKey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate(); // useNavigate로 페이지 이동
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -17,7 +20,7 @@ const MyStorePage = () => {
     }
 
     // userKey 가져오는 API 호출
-    axios.get('https://pandasanda.shop/api/user/key', {
+    axios.get(`${API_URL}/api/user/key`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
@@ -27,13 +30,12 @@ const MyStorePage = () => {
       console.error("Error fetching userKey:", error);
       setError("유저 키를 가져오는 데 실패했습니다.");
     });
-  }, []);
+  }, [API_URL]);
 
   useEffect(() => {
     if (userKey) {
       const token = localStorage.getItem('token');
-
-      axios.get(`https://pandasanda.shop/api/user/mystore/${userKey}`, {
+      axios.get(`${API_URL}/api/user/mystore/${userKey}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -46,28 +48,59 @@ const MyStorePage = () => {
         setLoading(false);
       });
     }
-  }, [userKey]);
+  }, [userKey, API_URL]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   const formatPrice = (price) => price.toLocaleString() + "원";
 
+  const handleDelete = (productId) => {
+    if (window.confirm("정말로 이 상품을 삭제하시겠습니까?")) {
+      const token = localStorage.getItem('token');
+  
+      axios.delete(`${API_URL}/api/product/delete/${productId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(() => {
+        setProducts(products.filter(product => product.itemKey !== productId));
+        alert("상품이 삭제되었습니다.");
+      })
+      .catch(error => {
+        console.error("Error deleting product:", error);
+        alert("상품 삭제에 실패했습니다.");
+      });
+    }
+  };
+
+  const handleEdit = (productKey) => {
+    navigate(`/product/${productKey}`);  // 수정 페이지로 이동
+  };
+
   return (
     <div>
       <div className="product-view">마이스토어</div>
       <div className="product-box">
         {products.map(product => (
-        <Link className = "product-text" to={`/product/detail/${product.itemKey}`} key={product.itemKey}>
-        <ProductItem
-            imgSrc={product.images[0]}
-            title={product.productName}
-            price={`${formatPrice(product.price)}`}
-            address={product.userAddress || "지역 정보 없음"}
-            status={`상품 상태: ${product.productCondition}`}
-        />
-        </Link>
-    ))}
+          <div
+            className="product-text"
+            key={product.itemKey}
+            onClick={() => navigate(`/product/detail/${product.itemKey}`)} // 상품 클릭 시 상세 페이지로 이동
+          >
+            <ProductItem
+              imgSrc={product.images[0]}
+              title={product.productName}
+              tradeMethod={product.tradeMethod}
+              shippingMethod={product.shippingMethod}
+              price={formatPrice(product.price)}
+              address={product.userAddress || "지역 정보 없음"}
+              status={`${product.productCondition}`}
+              showEditDeleteButtons={true}
+              onDelete={() => handleDelete(product.itemKey)}
+              onEdit={() => handleEdit(product.itemKey)} // 수정 함수 호출
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,19 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate로 변경
 
-function ProductItem({ imgSrc, title, price, address, status, productId }) {
-  const navigate = useNavigate(); // useNavigate로 페이지 이동을 위한 navigate 객체 생성
-
-  const handleClick = () => {
-    if (productId) { // productId가 있을 때만 navigate 호출
-      navigate(`/product/detail/${productId}`); // 클릭 시 상세 페이지로 이동
-    } else {
-      console.error("Product ID is undefined"); // 디버깅을 위한 콘솔 출력
-    }
-  };
+function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address, status, showEditDeleteButtons, onDelete , onEdit }) {
 
   return (
-    <div className="product" onClick={handleClick}> {/* 클릭 시 handleClick 호출 */}
+    <div className="product">
       <div className="product-img">
         <img className="product-img" src={imgSrc} alt={title} />
       </div>
@@ -21,9 +11,30 @@ function ProductItem({ imgSrc, title, price, address, status, productId }) {
       <div className="product-text price">{price}</div>
       <div className="product-text address">{address}</div>
       <div className="product-text status">{status}</div>
+      <div className="transaction-method">{tradeMethod}{shippingMethod}</div>
+
+      {/* 수정 & 삭제 버튼 */}
+      {showEditDeleteButtons && (
+        <div className="product-text product-buttons">
+          <button
+            className="product-text product-button edit"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit(); // 수정 버튼 클릭 시 수정 페이지로 이동
+            }}
+          >
+            수정
+          </button>
+          <button
+            className="product-text product-button delete"
+            onClick={(e) => { e.stopPropagation(); onDelete(); }} // 삭제 버튼 클릭 시 삭제 동작
+          >
+            삭제
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 export default ProductItem;
-

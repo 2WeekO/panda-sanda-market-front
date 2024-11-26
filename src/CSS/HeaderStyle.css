@@ -1,14 +1,18 @@
 
-
 .header-container {
-  width: 80%;
+  width: 100%;
   position: fixed;
+  left: 0;
   top: 0;
+  padding-top: 10px;
   display: flex;
-  background-color: rgba(255, 255, 255, 0.90);
-  z-index: 1000;
+  justify-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.945);
+  
   transform: translateY(-100%);
-  animation: slideDown 1ms forwards;
+  animation: slideDown 0.8s forwards;
 }
 
 @keyframes slideDown {
@@ -21,24 +25,33 @@
   width: 100%;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  text-align: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  
+}
+.logo-img{
+  padding: 0 180px;
+
+  width: 100px;
 }
 
 .menu{
-  padding: 0 50px;
+  
+  margin: 0 50px;
 }
 
 
 .nav {
+
   justify-content: center;
-  justify-items: center;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 .nav-center{
-  padding: 0 50px;
+  margin: 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;

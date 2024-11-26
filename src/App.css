@@ -1,6 +1,10 @@
+*{
+  margin: 0;
+}
 
 .full-screen{
   display: flex;
+  background-color: aqua;
   justify-content: center;
   height: 240px;
 }
@@ -15,7 +19,29 @@
 }
 
 .lay-out{
-  width: 80%;
+  width: 100%;
+}
+
+.address-register {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  border-radius: 0 0 20px 20px ;
+  text-align: center;
+
+}
+
+.account-button{
+  text-decoration: none;
+  color: white;
+  border: 1px white solid;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0 20px;
+  font-size: 14px;
+}
+.account-button:hover{
+  background-color: rgb(82, 82, 82);
 }
 
 .top-nav{

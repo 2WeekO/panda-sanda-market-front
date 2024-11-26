@@ -1,9 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ProductForm = () => {
-  const [images, setImages] = useState(['', '', '','','']);
+
+  const API_URL = process.env.REACT_APP_API_URL;
+
+  const [productData, setProductData] = useState(null); // productData 초기화
+  const [file, setFile] = useState(null); // file 초기화
+
+  const { productKey } = useParams(); // URL에서 productKey 가져오기
+  const [isEditMode, setIsEditMode] = useState(false); // 수정 모드인지 확인
+
+  const [images, setImages] = useState(['', '', '', '', '']);
   const [productName, setProductName] = useState('');
   const [category1, setCategory1] = useState('');
   const [category2, setCategory2] = useState('');
@@ -11,7 +20,7 @@ const ProductForm = () => {
   const [productCondition, setProductCondition] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState();
   const [tradeMethod, setTradeMethod] = useState('');
   const [wayComment, setWayComment] = useState('')
   const [shippingMethod, setShippingMethod] = useState('');
@@ -50,47 +59,69 @@ const ProductForm = () => {
   };
 
 
+  // fetchProductData를 useCallback으로 감싸서 의존성 배열에 추가
+  const fetchProductData = useCallback(async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/product/${productKey}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const product = response.data;
+      setProductName(product.productName);
+      setCategory1(product.category1);
+      setCategory2(product.category2);
+      setCategory3(product.category3);
+      setProductCondition(product.productCondition);
+      setDescription(product.description);
+      setPrice(product.price);
+      setQuantity(product.quantity);
+      setTradeMethod(product.tradeMethod);
+      setWayComment(product.wayComment);
+      setShippingMethod(product.shippingMethod);
+
+      // 서버에서 반환된 이미지 URL을 상태에 설정
+      setImages(product.images || []);
+    } catch (error) {
+      console.error('Error fetching product data:', error);
+    }
+  }, [API_URL, productKey, token]);
+
   useEffect(() => {
-    
     if (!token) {
-      // 토큰이 없으면 로그인 페이지로 리다이렉트
       navigate('/login');
-      alert("로그인이 필요합니다.(토큰이 존재하지 않습니다.");
+      alert('로그인이 필요합니다.');
       return;
     }
-  },);
+
+    if (productKey) {
+      setIsEditMode(true);  // 수정 모드로 진입
+      fetchProductData();   // 기존 상품 정보 가져오기
+    }
+  }, [productKey, token, fetchProductData, navigate]);  // 의존성 배열에 fetchProductData 추가
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]); // 파일을 file 상태에 저장
+  };
 
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
 
     // 이미 선택된 이미지들과 비교하여 중복 체크
     const isDuplicate = images.some((img) => img && img.name === file.name && img.size === file.size);
-    
+
     if (isDuplicate) {
-        alert('같은 이미지를 두 번 올릴 수 없습니다.');
-        return;
+      alert('같은 이미지를 두 번 올릴 수 없습니다.');
+      return;
     }
 
     const newImages = [...images];
     newImages[index] = file; // 파일을 배열에 저장
     setImages(newImages);
+  };
 
-    
-
-};
-
-  // FormData를 사용한 상품 등록
   const ProductController = async () => {
     const formData = new FormData();
-
-    // 이미지 파일을 FormData에 추가
-    images.forEach((image, index) => {
-      if (image) {
-        formData.append('images', image);
-      }
-    });
-
-    // 다른 상품 데이터도 FormData에 추가
+    
+    formData.append('file', file);
     formData.append('productName', productName);
     formData.append('category1', category1);
     formData.append('category2', category2);
@@ -103,19 +134,39 @@ const ProductForm = () => {
     formData.append('wayComment', wayComment);
     formData.append('shippingMethod', shippingMethod);
 
-    try {
-      const resProduct = await axios.post("https://pandasanda.shop/api/product/register", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-      console.log(resProduct);
-      window.location.href = '/';
-      alert("상품이 등록되었습니다.");
+    if (images && images.length > 0) {
+      images.forEach((image) => formData.append('images', image));
+    }
+    const productData = {
+      productName,
+      category1,
+      category2,
+      category3,
+      productCondition,
+      description,
+      price,
+      quantity,
+      tradeMethod,
+      wayComment,
+      shippingMethod,
+    };
 
+    formData.append('product', new Blob([JSON.stringify(productData)], { type: 'application/json' }));
+
+    try {
+      const response = isEditMode
+        ? await axios.put(`${API_URL}/api/product/update/${productKey}`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
+          })
+        : await axios.post(`${API_URL}/api/product/register`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
+          });
+          
+      console.log(response);
+      navigate('/');
+      alert(isEditMode ? '상품이 수정되었습니다.' : '상품이 등록되었습니다.');
     } catch (err) {
-      console.error('Error during product registration:', err);
+      console.error('Error during product operation:', err);
       alert(err.response?.data?.message || err);
     }
   };
@@ -124,42 +175,56 @@ const ProductForm = () => {
     event.preventDefault();  // 기본 폼 제출 동작 방지
     ProductController();      // ProductController 호출
   };
-
   
 
   return (
     <div className="product-form-container">
-      <h1>상품 판매 하기</h1>
+      <h1>{isEditMode ? '상품 수정하기' : '상품 판매하기'}</h1>
       <form onSubmit={handleSubmit}>
         <div className="image-upload-section input-group">
           <label>상품 사진</label>
+          
           <div className="image-upload-wrapper">
-            {images.map((image, index) => (
-              <div key={index} className="image-upload" onClick={() => document.getElementById(`file-input-${index}`).click()}>
-                <input
-                  type="file"
-                  id={`file-input-${index}`}
-                  className="file-input"
-                  style={{ display: 'none' }} // 파일 입력을 숨김
-                  onChange={(e) => handleImageChange(index, e)}
+              {images.map((image, index) => (
+              <div
+              key={index}
+              className="image-upload"
+              onClick={() => document.getElementById(`file-input-${index}`).click()}
+              >
+
+              <input
+                type="file"
+                id={`file-input-${index}`}
+                className="file-input"
+                style={{ display: 'none' }} // 파일 입력을 숨김
+                onChange={(e) => handleImageChange(index, e)}
+              />
+
+              <input type="file" onChange={handleFileChange} />
+
+              {image ? (
+                // image가 URL일 경우 그 URL을 사용하고, File 객체일 경우 createObjectURL 사용
+                <img
+                  src={typeof image === 'string' ? image : URL.createObjectURL(image)}
+                  alt={`미리보기 ${index + 1}`}
+                  className="preview-image"
                 />
-                {image ? (
-                  <img src={URL.createObjectURL(image)} alt={`미리보기 ${index + 1}`} className="preview-image" />
-                ) : (
-                  <p className='file-input-text'>이미지 업로드 {index + 1 }</p>
-                )}
-              </div>
-              
+              ) : (
+                <p className="file-input-text">이미지 업로드 {index + 1}</p>
+              )}
+            </div>
             ))}
           </div>
+
         </div>
+
         <div className="input-group">
           <label>상품 명</label>
           <input
             type="text"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
-            placeholder="상품을 입력하세요."
+            placeholder="상품 명을 입력하세요."
           />
         </div>
 
@@ -301,9 +366,10 @@ const ProductForm = () => {
         )}
 
         <div className='center'>
-          <button type="submit" className="submit-button">등록 하기</button>
+        <button type="submit" className="submit-button">{isEditMode ? '수정 하기' : '등록 하기'}</button>
         </div>
       </form>
+      
     </div>
   );
 };

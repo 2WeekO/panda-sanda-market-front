@@ -1,7 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Logo_Image from './image/LOGO.png';
+
 
 const LoginPage = () => {
+
+    const API_URL = process.env.REACT_APP_API_URL;
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,7 +22,7 @@ const LoginPage = () => {
         const logindata = { email, password };
 
         try {
-            const res = await axios.post("https://pandasanda.shop/api/auth/login", logindata);
+            const res = await axios.post(`${API_URL}/api/auth/login`, logindata);
             const token = res.data.accessToken; // accessToken 호출
             const userKey = res.data.userKey; // userKey 호출 (응답에 포함되어 있어야 함)
 
@@ -40,7 +45,7 @@ const LoginPage = () => {
         <div className="all-center">
             <div className="sign-view">
                 <div className="sign-layout">
-                    <a className="logo" href="/"><img src="icon/LOGO.png" alt="Logo" /></a>
+                    <a className="logo" href="/"><img src={Logo_Image} alt="Logo" /></a>
                     <div className="sign-title">로그인</div>
 
                     <div className="input-box">

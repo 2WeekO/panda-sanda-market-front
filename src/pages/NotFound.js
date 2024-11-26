@@ -3,9 +3,9 @@ import React from 'react';
 const NotFound = () => {
     return (
         <div>
-            404 Error
+            <h1>찾을 수 없는 페이지입니다.</h1>
         </div>
     );
 };
-  
+
 export default NotFound;

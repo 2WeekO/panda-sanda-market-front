@@ -1,18 +1,23 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import BuyButtton from './Component/BuyButton';
 
 const ProductDetail = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [mainImage, setMainImage] = useState(''); // 메인 이미지 상태 추가
   const { itemKey } = useParams();
+  
+
 
   useEffect(() => {
     axios
-      .get(`https://pandasanda.shop/api/product/${productId}`)
+      .get(`${API_URL}/api/product/${productId}`)
       .then((response) => {
         setProduct(response.data);
         setMainImage(response.data.images?.[0] || '/images/default.jpg'); // 초기 메인 이미지 설정
@@ -28,6 +33,8 @@ const ProductDetail = () => {
   const handleThumbnailClick = (img) => {
     setMainImage(img); // 클릭한 썸네일 이미지를 메인 이미지로 설정
   };
+
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -56,21 +63,30 @@ const ProductDetail = () => {
           </div>
         </div>
         <div className="product-info">
+          <div className='transaction-method'>{product.tradeMethod}{product.shippingMethod}</div>
           <h1>{product.productName}</h1>
-          <div className="price">{formatPrice(product.price)}<span className="shipping-included">*배송비 포함</span></div>
+          <div className="price">{formatPrice(product.price)}</div>
           <div className="location">{product.userAddress || "위치 정보 없음"}</div>
-          <div className="condition">물품 상태: <span className="condition-good">{product.productCondition}</span></div>
-          <div className="views">조회수 {product.viewCount}</div>
+          <div className="condition"><span className="condition-good">{product.productCondition}</span></div>
+          
 
           <div className="product-description">
             <h2>물품 설명</h2>
             <p>{product.description}</p>
-            <p>판매자:{product.userNickname || "닉네임 정보 없음"}</p>
           </div>
+          <div className='view-box'>
+            <p>🏪{product.userNickname || "닉네임 정보 없음"}</p>
+            <div className="views">조회 {product.viewCount || 0} | 찜 {product.wishCount || 0} | 좋아요 {product.likeCount || 0}</div>
+          </div>
+          
 
           <div className="actions">
-            <button type="button" className="like-button">❤ {product.likeCount || 0}</button>
-            <button type="button" className="purchase-button">구입 신청</button>
+            <div className='button-box'>
+            {/* <WishButton></WishButton> */}
+            <BuyButtton></BuyButtton>
+            </div>
+            
+            
           </div>
         </div>
       </div>

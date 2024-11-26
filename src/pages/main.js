@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import ProductItem from './Component/ProductItem';
 
 function Main() {
+
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [products, setProducts] = useState([]); // 상품 데이터를 위한 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null);     // 에러 상태 추가
 
   useEffect(() => {
     axios
-      .get("https://pandasanda.shop/api/product/all")
+      .get(`${API_URL}/api/product/all`)
       .then((response) => {
         setProducts(response.data); // 서버로부터 받은 상품 데이터를 상태에 저장
         setLoading(false);          // 로딩 상태를 false로 변경
@@ -36,14 +39,18 @@ function Main() {
                 <Link className = "product-text" to={`/product/detail/${product.itemKey}`} key={product.itemKey}>
                     <ProductItem
                         imgSrc={product.images?.[0] || '/images/default.jpg'}  // 첫 번째 이미지 사용, 없으면 기본 이미지 경로
+                        tradeMethod={product.tradeMethod}
+                        shippingMethod={product.shippingMethod}
                         title={product.productName}
                         price={`${formatPrice(product.price)}`}
                         address={product.userAddress || "지역 정보 없음"}
-                        status={`상품 상태: ${product.productCondition}`}
+                        status={`${product.productCondition}`}
                         productId={product.itemKey}
                     />
                 </Link>
+                
             ))}
+            
         </div>
     </div>
   );

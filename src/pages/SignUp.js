@@ -1,7 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Logo_Image from './image/LOGO.png';
 
 const SignUpPage = () => {
+
+    const API_URL = process.env.REACT_APP_API_URL;
+
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [nickname, setNickname] = useState("");
@@ -43,7 +47,7 @@ const SignUpPage = () => {
         setLoading(true); // 로딩 시작
 
         try {
-            const res = await axios.post("https://pandasanda.shop/api/auth/signup", data, {
+            const res = await axios.post(`${API_URL}/api/auth/signup`, data, {
                 headers: {
                     "Content-Type": "application/json", // JSON 데이터 형식
                     "Accept": "application/json", // 서버로부터 받을 데이터 형식
@@ -76,7 +80,7 @@ const SignUpPage = () => {
         <>
             <div className="sign-view">
                 <div className="sign-layout">
-                    <a className="logo" href="/"><img src="icon/LOGO.png"></img></a>
+                    <a className="logo" href="/"><img src={Logo_Image}></img></a>
                     <div className="sign-title">회원가입</div>
 
                     <div className="input-box">

@@ -1,8 +1,13 @@
 import axios from "axios"; // axios를 가져옴
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Link 컴포넌트 가져오기
+import Logo_Image from './image/LOGO.png';
+import Search_Image from './image/search.png';
 
 const TopNavigation = () => {
+
+    const API_URL = process.env.REACT_APP_API_URL;
+
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userKey, setUserKey] = useState();
 
@@ -19,7 +24,7 @@ const TopNavigation = () => {
 
     const fetchUserKey = async (token) => {
         try {
-            const response = await axios.get("https://pandasanda.shop/api/user/key", {
+            const response = await axios.get(`${API_URL}/api/user/key`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 포함
                 },
@@ -44,8 +49,14 @@ const TopNavigation = () => {
 
     return (
         <div>
+            <div className="address-register">
+                중고 거래를 하시기 전, 먼저 자신의 계좌를 등록하세요.
+                <a className="account-button" href="/account">새로운 계좌 등록</a>
+            </div>
             <div className="top-nav">
+                
                 <a className="nav-text" href="/signup">회원가입</a>
+                
                 <div className="nav-text">
                     {isAuthenticated ? (
                         <button className="nav-text" onClick={handleLogout}>로그아웃</button>
@@ -58,18 +69,22 @@ const TopNavigation = () => {
                     <Link className="nav-text mystore" to={`/mystore/${userKey}`}>마이스토어</Link>
                 </button>
                 )}
-                <a className="nav-text" href="/cart">장바구니</a>
+
+                {isAuthenticated && userKey !== null && userKey !== undefined && (
+                <a className="nav-text" href="/purchase">구매관리</a>
+                )}
+                
             </div>
 
             <div className="middle-nav">
                 <a className="nav-text-m nav-border" href="/category">카테고리</a>
-                <a className="logo" href="/"><img src="icon/LOGO.png" alt=""/></a>
+                <a className="logo" href="/"><img src={Logo_Image} alt=""/></a>
                 <a className="nav-text-m nav-border" href="/product">판매하기</a>
             </div>
 
             <div className="search-box">
                 <input className="search-input" type="text" placeholder="물품 검색" />
-                <a href="/search"><img className='search-btn' src="icon/search.png" alt=""/></a>
+                <a href="/search"><img className='search-btn' src={Search_Image} alt=""/></a>
             </div>
         </div>
     );

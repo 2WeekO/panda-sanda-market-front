@@ -7,7 +7,7 @@ const Footer = () => {
     
       <div className="text-center">
         <hr/>
-        Copyright SHARESTORE
+        Copyright | 판다산다 | PANDASANDA
       </div>
     
   );
