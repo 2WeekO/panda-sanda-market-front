@@ -2,25 +2,27 @@ import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+// =========================== 구매 신청 기능 ================================
+
 export const createPurchaseRequest = async (token, data) => {
   return axios.post(`${API_URL}/api/purchase/request`, data, {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
 
-export const decidePurchaseRequest = async (token, requestId, decision) => {
-  return axios.put(
-    `${API_URL}/api/purchase/${requestId}/decision`,
-    null,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-      params: { decision },
-    }
-  );
+export const fetchMyPurchaseRequests = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/purchase/my-requests`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch purchase requests:', error);
+    throw error;
+  }
 };
 
-export const getSellerAccount = async (token, requestId) => {
-  return axios.get(`${API_URL}/api/purchase/${requestId}/account`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-};
+
+// =========================== 구매 신청 기능 ================================

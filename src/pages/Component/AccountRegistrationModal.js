@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const AccountRegistrationModal = ({ isOpen, onClose }) => {
   const API_URL = process.env.REACT_APP_API_URL;
   const [accountNumber, setAccountNumber] = useState("");

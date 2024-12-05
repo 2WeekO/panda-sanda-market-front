@@ -1,76 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import DecisionModal from "./Component/DecisionModal";
-import SellerAccountInfo from './Component/SellerAccount';
+import '../CSS/RequestPage.css';
+import { fetchMyPurchaseRequests } from '../Services/purchaseService';
 
-const PurchasePage = () => {
-
-  const navigate = useNavigate();
-
-  const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
-    const [isSellerAccountModalOpen, setIsSellerAccountModalOpen] = useState(false);
-  
-    const [selectedRequestId, setSelectedRequestId] = useState(null); // 선택된 요청 ID 관리
-  
-    // 모달 열기
-    const openDecisionModal = (requestId) => {
-      setSelectedRequestId(requestId); // 요청 ID 저장
-      setIsDecisionModalOpen(true); // 승인/거부 모달 열기
-    };
-  
-    const openSellerAccountModal = (requestId) => {
-      setSelectedRequestId(requestId); // 요청 ID 저장
-      setIsSellerAccountModalOpen(true); // 계좌 모달 열기
-    };
-  
-    // 모달 닫기
-    const closeModal = () => {
-      setIsDecisionModalOpen(false);
-      setIsSellerAccountModalOpen(false);
-    };
+const RequestPage = () => {
+  const [purchaseRequests, setPurchaseRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');  // 로컬 스토리지에서 토큰 확인
-
+    const token = localStorage.getItem('token');
     if (!token) {
-      // 토큰이 없으면 로그인 페이지로 리다이렉트
-      navigate('/login');
-      alert("로그인이 필요합니다.");
+      setError('로그인이 필요합니다.');
+      setLoading(false);
+      return;
     }
-    
-  }, [navigate]);
 
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const purchaseData = await fetchMyPurchaseRequests(token);
+        setPurchaseRequests(purchaseData);
+      } catch (err) {
+        console.error('Error in fetchData:', err);
+        setError('데이터를 가져오는 데 실패했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    
-    <div>
-      <h1>구매 요청 관리</h1>
-      
-      {/* 예시 버튼 */}
-      <button className='button-modal' onClick={() => openDecisionModal(1)}>구매 요청 승인/거부</button>
-      <button className='button-modal' onClick={() => openSellerAccountModal(1)}>판매자 계좌 보기</button>
-
-      {/* 승인/거부 모달 */}
-      {isDecisionModalOpen && (
-        <DecisionModal
-          requestId={selectedRequestId}
-          isOpen={isDecisionModalOpen}
-          onClose={closeModal}
-        />
-      )}
-
-      {/* 판매자 계좌 정보 */}
-      {isSellerAccountModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button className='close-button' onClick={closeModal}>&times; </button>
-            <SellerAccountInfo requestId={selectedRequestId} />
-          </div>
-        </div>
-      )}
+    <div className="request-page">
+      <h2>구매 요청 관리</h2>
+      <div className="request-section">
+        <h3>구매 요청</h3>
+        <ul>
+          {purchaseRequests.length === 0 ? (
+            <p>구매 요청이 없습니다.</p>
+          ) : (
+            purchaseRequests.map((request) => (
+              <li key={request.id}>
+                <p>상품 이름: {request.productName}</p>
+                <p>메시지: {request.message}</p>
+                <p>상태: {request.status}</p>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
     </div>
-    
   );
 };
 
-export default PurchasePage;
+export default RequestPage;

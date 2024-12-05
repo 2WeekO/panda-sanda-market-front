@@ -1,0 +1,35 @@
+.request-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.request-container {
+  display: flex;
+  gap: 20px;
+}
+
+.request-section {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+
+.request-section h3 {
+  margin-bottom: 16px;
+}
+
+.request-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.request-section li {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+.request-section li:last-child {
+  border-bottom: none;
+}
