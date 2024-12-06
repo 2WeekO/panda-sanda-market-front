@@ -4,10 +4,23 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 // =========================== 구매 신청 기능 ================================
 
-export const createPurchaseRequest = async (token, data) => {
-  return axios.post(`${API_URL}/api/purchase/request`, data, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const createPurchaseRequest = async (token, { buyerId ,productId, message }) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/purchase/create`,
+      { buyerId ,productId, message }, // 요청 본문
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // JWT 토큰 인증 헤더
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error during purchase request creation:", error);
+    throw error;
+  }
 };
 
 export const fetchMyPurchaseRequests = async (token) => {

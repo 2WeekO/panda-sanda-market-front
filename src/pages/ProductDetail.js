@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BuyButtton from './Component/BuyButton';
 
+
 const ProductDetail = () => {
   const API_URL = process.env.REACT_APP_API_URL;
 
@@ -12,6 +13,8 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const [mainImage, setMainImage] = useState(''); // 메인 이미지 상태 추가
   const { itemKey } = useParams();
+
+  
   
 
 
@@ -83,7 +86,7 @@ const ProductDetail = () => {
           <div className="actions">
             <div className='button-box'>
             {/* <WishButton></WishButton> */}
-            <BuyButtton></BuyButtton>
+            {productId && <BuyButtton productId={productId}></BuyButtton>}
             </div>
             
             
