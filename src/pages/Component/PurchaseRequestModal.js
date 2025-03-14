@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createPurchaseRequest } from "../../Services/purchaseService";
 import { getUserKey } from "../../Services/userService";
 
-const PurchaseRequestModal = ({ productId, isOpen, onClose }) => {
+const PurchaseRequestModal = ({ sellerId, productId, isOpen, onClose }) => {
   const [message, setMessage] = useState("");
   const [userKey, setUserKey] = useState(null);
 
@@ -22,7 +22,7 @@ const PurchaseRequestModal = ({ productId, isOpen, onClose }) => {
       setUserKey(fetchedUserKey);
 
       // 구매 요청을 생성
-      await createPurchaseRequest(token, { buyerId: fetchedUserKey, productId, message });
+      await createPurchaseRequest(token, { buyerId: fetchedUserKey,sellerId, productId, message });
       alert("구매 요청이 성공적으로 전송되었습니다!");
       onClose();
     } catch (error) {

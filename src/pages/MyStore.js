@@ -7,7 +7,7 @@ const MyStorePage = () => {
   const API_URL = process.env.REACT_APP_API_URL;
   const [products, setProducts] = useState([]);
   const [userKey, setUserKey] = useState(null);
-  const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState(null);
 
   const navigate = useNavigate(); // useNavigate로 페이지 이동
@@ -40,17 +40,17 @@ const MyStorePage = () => {
       })
       .then(response => {
         setProducts(response.data);
-        setLoading(false);
+        
       })
       .catch(error => {
         console.error("Error fetching products:", error);
         setError("상품 정보를 가져오는 데 실패했습니다.");
-        setLoading(false);
+        
       });
     }
   }, [userKey, API_URL]);
 
-  if (loading) return <div>Loading...</div>;
+  
   if (error) return <div>{error}</div>;
 
   const formatPrice = (price) => price.toLocaleString() + "원";

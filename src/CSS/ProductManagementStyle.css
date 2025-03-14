@@ -1,0 +1,195 @@
+/* 전체 페이지 스타일 */
+.page-container {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+
+/* 버튼들 컨테이너 */
+.button-container {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+/* 버튼 기본 스타일 */
+.page-button {
+  background-color: #2a2a2a;
+  color: #fff;
+  padding: 15px 30px;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 버튼에 그림자 */
+}
+
+/* 선택된 버튼(active) 스타일 */
+.page-button.active {
+  background-color: rgb(0, 187, 125); /* 선택된 버튼은 빨간색과 오렌지 그라데이션 */
+  transform: scale(1.1); /* 선택된 버튼 크기 확대 */
+}
+
+/* 버튼 호버 시 스타일 */
+.page-button:hover {
+  background-color: rgb(0, 187, 125); /* 파란색과 녹색 그라데이션 */
+  transform: translateY(-5px); /* 버튼 위로 올려주는 효과 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 강조 */
+}
+
+/* 버튼 클릭 시 약간의 효과 */
+.page-button:active {
+  transform: translateY(2px); /* 클릭하면 버튼이 살짝 눌리는 효과 */
+}
+
+/* 내용 컨테이너 */
+.content-container {
+  margin-top: 30px;
+  padding: 30px;
+  border-radius: 12px;
+  color: black;
+  width: 100%;
+  
+  text-align: center;
+}
+
+/* 작은 반짝이는 효과 */
+.page-button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* ------------------------구매 신청 목록 CSS -------------------------------*/
+.management-page {
+  color: #000000;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.tip-message {
+  margin-top: 20px;
+  background: rgba(255, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  color: #ff5555;
+}
+
+
+
+.management-table {
+  margin-top: 10px;
+  background-color: #8a8a8a2a;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.management-item{
+  border-top: solid 2px rgb(138, 138, 138);
+  justify-content: center;
+
+}
+
+.management-status {
+  font-weight: bold;
+}
+
+.management-button-group button{
+  margin: 3px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.management-btn {
+  background-color: #0f945f;
+  color: rgb(0, 0, 0);
+}
+
+
+.popup {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.timer {
+  color: red;
+}
+
+.close-btn {
+  background: #ff4444;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+/* 상품 정보 스타일 */
+.management-product-name {
+  font-size: 16px;
+  color: black;
+}
+
+.management-btn-text{
+  border-radius: 12px;
+}
+
+.management-status {
+  
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ff8c8cb7;
+}
+
+.management-message {
+  font-size: 16px;
+  color: #000000;
+}
+
+.management-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff5e36;
+}
+
+
+/* 버튼 비활성화 */
+.management-button-group button:disabled {
+  background: #444;
+  color: #9b9b9b;
+  cursor: not-allowed;
+}
+
+/* 구매 요청 없음 */
+.management-no-request {
+  margin-top: 100px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
+}

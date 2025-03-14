@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PurchaseRequestModal from "./PurchaseRequestModal";
 
-const BuyButton = ({ productId }) => {
+const BuyButton = ({ sellerId ,productId }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   
@@ -25,6 +25,7 @@ const BuyButton = ({ productId }) => {
       </button>
       <PurchaseRequestModal
         productId={productId}
+        sellerId={sellerId}
         isOpen={isModalOpen}
         onClose={closeModal}
       />

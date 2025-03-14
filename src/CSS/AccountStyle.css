@@ -1,0 +1,36 @@
+.account-page{
+  display: flex;
+  justify-content: center;
+}
+
+.account-box{
+  display: block;
+  text-align: center;
+  justify-content: center;
+  width: 500px;
+}
+.account-box div{
+  font-size: 1.2rem;
+  margin: 20px;
+}
+
+.account-input input{
+  width: 15rem;
+  height: 1.5rem;
+  padding: 5px;
+  margin: 10px;
+  font-size: 18px;
+}
+
+.account-box button{
+  margin: 20px;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  background-color: black;
+  color: white;
+  border-radius: 12px;
+  
+}

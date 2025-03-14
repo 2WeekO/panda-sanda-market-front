@@ -14,7 +14,7 @@ const SignUpPage = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
-    const [loading, setLoading] = useState(false); // 로딩 상태 추가
+    
     const [agreeToTerms, setAgreeToTerms] = useState(false); // 개인정보 수집 동의 체크 추가
 
     const controllerSignUp = async () => {
@@ -44,7 +44,7 @@ const SignUpPage = () => {
             passwordCheck,
         };
 
-        setLoading(true); // 로딩 시작
+        
 
         try {
             const res = await axios.post(`${API_URL}/api/auth/signup`, data, {
@@ -71,8 +71,6 @@ const SignUpPage = () => {
             alert(err.response?.data?.message || err );
             
 
-        } finally {
-            setLoading(false); // 로딩 종료
         }
     };
 
@@ -180,8 +178,8 @@ const SignUpPage = () => {
                         개인정보 수집 및 이용 동의 *
                     </div>
 
-                    <button className="submit-btn" type="button" onClick={controllerSignUp} disabled={loading}>
-                        {loading ? "가입 중..." : "가입하기"}
+                    <button className="submit-btn" type="button" onClick={controllerSignUp}>
+                        { "가입하기"}
                     </button>
                 </div>
             </div>

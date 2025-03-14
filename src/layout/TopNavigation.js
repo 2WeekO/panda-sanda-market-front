@@ -1,6 +1,6 @@
 import axios from "axios"; // axios를 가져옴
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Link 컴포넌트 가져오기
+import { Link, useNavigate } from "react-router-dom"; // Link 컴포넌트 가져오기
 import Logo_Image from './image/LOGO.png';
 import Search_Image from './image/search.png';
 
@@ -10,7 +10,16 @@ const TopNavigation = () => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userKey, setUserKey] = useState();
+    const navigate = useNavigate();
+    const [searchKeyword, setSearchKeyword] = useState(""); // 검색 키워드 상태
 
+    const handleSearch = () => {
+        console.log("검색어:", searchKeyword); // 검색어 확인용 로그
+        if (searchKeyword.trim()) {
+        navigate(`/search?keyword=${encodeURIComponent(searchKeyword)}`);
+        }
+    };
+    
     useEffect(() => {
         const token = localStorage.getItem('token'); // accessToken을 가져옴
         if (token) {
@@ -29,7 +38,7 @@ const TopNavigation = () => {
                     Authorization: `Bearer ${token}`, // 토큰을 Authorization 헤더에 포함
                 },
             });
-            console.log(response.data); // API 응답 확인
+            
             setUserKey(response.data); // 가져온 userKey 설정
             localStorage.setItem('userKey', response.data); // localStorage에 저장
         } catch (error) {
@@ -49,13 +58,15 @@ const TopNavigation = () => {
 
     return (
         <div>
+
             <div className="address-register">
                 중고 거래를 하시기 전, 먼저 자신의 계좌를 등록하세요.
-                <a className="account-button" href="/account">새로운 계좌 등록</a>
+                <a className="account-button" href="/account">계좌 등록하기</a>
             </div>
+
             <div className="top-nav">
                 
-                <a className="nav-text" href="/signup">회원가입</a>
+                {isAuthenticated ? (<></>):(<a href="/signup" className="nav-item">회원가입</a>)}
                 
                 <div className="nav-text">
                     {isAuthenticated ? (
@@ -77,15 +88,27 @@ const TopNavigation = () => {
             </div>
 
             <div className="middle-nav">
-                <a className="nav-text-m nav-border" href="/category">카테고리</a>
+
                 <a className="logo" href="/"><img src={Logo_Image} alt=""/></a>
-                <a className="nav-text-m nav-border" href="/product">판매하기</a>
+            </div>
+            
+            <div className="search-box">
+                        <input
+                            className="search-input"
+                            type="text"
+                            placeholder="물품 검색"
+                            value={searchKeyword}
+                            onChange={(e) => setSearchKeyword(e.target.value)}
+                            onKeyDown={(e) => {if (e.key === "Enter") {handleSearch();}}}
+                        />
+
+                        <a onClick={handleSearch}>
+                            <img className="search-btn" src={Search_Image} alt="검색"/>
+                        </a>
             </div>
 
-            <div className="search-box">
-                <input className="search-input" type="text" placeholder="물품 검색" />
-                <a href="/search"><img className='search-btn' src={Search_Image} alt=""/></a>
-            </div>
+            
+
         </div>
     );
 };

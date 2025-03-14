@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { deleteAccount, fetchAccount, registerAccount, updateAccount } from '../Services/accountService';
+import { useNavigate } from 'react-router-dom';
 
 const AccountPage = () => {
     const [account, setAccount] = useState(null);
@@ -12,6 +13,7 @@ const AccountPage = () => {
     });
 
     const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     const loadAccount = async () => {
         try {
@@ -80,13 +82,18 @@ const AccountPage = () => {
     };
 
     useEffect(() => {
-
+        if (!token) {
+            navigate('/login');
+            alert('로그인이 필요합니다.');
+            return;
+        }
         loadAccount();
 
     }, []);
 
     return (
-        <div>
+        <div className='account-page'>
+        <div className='account-box'>
             <h1>계좌 관리</h1>
             {!isEditing ? (
                 <div>
@@ -106,30 +113,36 @@ const AccountPage = () => {
                     )}
                 </div>
             ) : (
-                <div>
+                <div className='account-input'>
                     <h2>{account ? '계좌 수정' : '계좌 등록'}</h2>
                     <input
+                        
                         type="text"
-                        placeholder="은행 이름"
+                        placeholder="은행 이름 ex) OO은행"
                         value={accountData.bankName}
                         onChange={(e) => setAccountData({ ...accountData, bankName: e.target.value })}
                     />
                     <input
+                        
                         type="text"
-                        placeholder="계좌 번호"
+                        placeholder="계좌 번호 (-없이)"
                         value={accountData.accountNumber}
                         onChange={(e) => setAccountData({ ...accountData, accountNumber: e.target.value })}
                     />
                     <input
                         type="text"
+        
                         placeholder="소유주 이름"
                         value={accountData.holderName}
                         onChange={(e) => setAccountData({ ...accountData, holderName: e.target.value })}
+                        onKeyDown={(e) => {if (e.key === "Enter") {handleSave();}}}
                     />
-                    <button onClick={handleSave}>{account ? '수정 완료' : '등록 완료'}</button>
+                    <button onClick={handleSave}>{account ? '수정 완료' : '등록하기'}</button>
                     <button onClick={() => setIsEditing(false)}>취소</button>
                 </div>
             )}
+        </div>
+
         </div>
     );
 };
