@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import NewProductButton from "./image/NewProductButton.png";
+import BottomNavigation from "./BottomNavigation";
 
 const MainLayOut = () => {
   const [showHeader, setShowHeader] = useState(false);
@@ -36,6 +37,7 @@ const MainLayOut = () => {
         <img className="new-product-btn" src={NewProductButton}></img>
       </a>
     </div>
+    <BottomNavigation/>
     </>
   );
 };

@@ -4,15 +4,19 @@ function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address,
 
   return (
     <div className="product">
+      
       <div className="product-img">
         <img className="product-img" src={imgSrc} alt={title} />
       </div>
+      <div className="display-block">
       <div className="product-text title">{title}</div>
       <div className="product-text price">{price}</div>
       <div className="product-text address">{address}</div>
-      <div className="product-text status">{status}</div>
-      <div className="transaction-method">{tradeMethod}{shippingMethod}</div>
 
+      <div className="display-flex">
+      <div className="product-text status">{status}</div>
+      <div className="product-text transaction-method">{tradeMethod}{shippingMethod}</div>
+      </div>
       {/* 수정 & 삭제 버튼 */}
       {showEditDeleteButtons && (
         <div className="product-text product-buttons">
@@ -33,6 +37,7 @@ function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address,
           </button>
         </div>
       )}
+    </div>
     </div>
   );
 }

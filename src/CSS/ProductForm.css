@@ -1,20 +1,37 @@
 
 
+@media (max-width:1000px) {
+  
+  .image-upload-wrapper .image-upload{
+    display: flex;
+    width: 80px;
+    height: 80px;
+  }
 
+  .product-form-container {
+    padding: 15px;
+  }
 
+  .category select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
+  .center .submit-button{
+    width: 160px;
+  }
+
+}
 
 .image-upload-section {
-  display: flex;
   flex-direction: column;
-  
 }
 
 .image-upload-wrapper {
   display: flex;
-  justify-content: space-between;
   width: 100%;
 }
+
 
 .image-upload {
   width: 150px;
@@ -40,9 +57,6 @@
   font-size: larger;
   font-weight: bold;
 }
-
-
-
 
 
 .condition-selector button {
@@ -104,7 +118,7 @@
 }
 
 .input-group label {
-  display: block;
+  display: flex;
   margin-bottom: 12px;
   margin-top: 12px;
   font-weight: bold;
@@ -219,21 +233,5 @@ textarea {
 
 .submit-button:hover {
   background-color: gray;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-  .product-form-container {
-    padding: 15px;
-  }
-
-  .category select {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .image-upload-wrapper {
-    flex-direction: column;
-  }
 }
 

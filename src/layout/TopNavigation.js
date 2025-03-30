@@ -26,6 +26,8 @@ const TopNavigation = () => {
             setIsAuthenticated(true); // 로그인 상태로 설정
             fetchUserKey(token); // userKey를 가져오는 API 호출
         } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userKey');
             setUserKey(null);
             setIsAuthenticated(false);
         }

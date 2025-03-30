@@ -6,6 +6,65 @@
     width: 80%;
 }
 
+@media (max-width:1000px) {
+    .view-width{
+        width: 100%;
+    }
+    .product-box .product{
+        width: 400px;
+        display: flex;
+    }
+    .display-flex{
+        display: flex;
+    }
+    .display-block{
+        display: block;
+    }
+    .product-box .product:hover{
+        border-radius: 20px;
+        background-color: rgba(216, 216, 216, 0.205);
+        display: flex;
+        margin: 10px;
+        width: 400px;
+        padding: 16px;
+    }
+    
+    .product .product-img{
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        margin: 0 20px 0 10px;
+        height: 110px;
+        width: 110px;
+    }
+
+    .product-box .product-text{
+        margin: 3px 5px;
+    }
+
+    .product-box .title{
+        font-weight: bolder;
+        font-size: 16px;
+    }
+    .product-box .price{
+        font-weight: bolder;
+        font-size: 20px;
+    }
+    .product-box .address{
+        font-size: 14px;
+        width: auto;
+    }
+    .product-box .status{
+        font-size: 14px;
+        width: 70px;
+        margin: 5px 0;
+        padding: 5px;
+    }
+    .product-box .transaction-method{
+        font-size: 14px;
+    }
+}
+
 .product-view{
     font-size: 20px;
     font-weight: bold;
@@ -13,7 +72,7 @@
     justify-content: center;
 }
 .product-box{
-
+    max-width: max-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -46,6 +105,7 @@
     width: 100%;
     margin-bottom: 12px;
 }
+
 .product-text{
     text-decoration-line: none;
     margin: 10px 0;
@@ -84,11 +144,10 @@
     text-align: center;
     padding: 3px;
     border-radius: 10px;
-    border: dotted 4px rgb(163, 163, 163);
 }
 
 .title{
-    width: max-content;
+    width: auto;
     max-width: 260px;
     font-weight: bolder;
     font-size: 20px;
@@ -101,11 +160,12 @@
 .address{
     font-weight: bolder;
     margin: 10px 0;
-    width: 70%;
+    width: auto;
     color: rgb(68, 68, 68);
     font-size: 16px;
     padding: 3px;
     border-radius: 12px;
+    
 }
 .status{
     margin: 3px 0;

@@ -22,7 +22,7 @@ const PurchaseRequestModal = ({ sellerId, productId, isOpen, onClose }) => {
       setUserKey(fetchedUserKey);
 
       // 구매 요청을 생성
-      await createPurchaseRequest(token, { buyerId: fetchedUserKey,sellerId, productId, message });
+      await createPurchaseRequest(token, { buyerId: userKey,sellerId, productId, message });
       alert("구매 요청이 성공적으로 전송되었습니다!");
       onClose();
     } catch (error) {

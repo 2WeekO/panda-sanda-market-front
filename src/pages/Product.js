@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import image_upload_icon from './image/image_upload_icon.png';
+
 const ProductForm = () => {
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -181,6 +183,7 @@ const ProductForm = () => {
     <div className="product-form-container">
       <h1>{isEditMode ? '상품 수정하기' : '상품 판매하기'}</h1>
       <form onSubmit={handleSubmit}>
+
         <div className="image-upload-section input-group">
           <label>상품 사진</label>
           
@@ -210,7 +213,7 @@ const ProductForm = () => {
                   className="preview-image"
                 />
               ) : (
-                <p className="file-input-text">이미지 업로드 {index + 1}</p>
+                <p className="file-input-text"><img src={image_upload_icon}></img></p>
               )}
             </div>
             ))}
