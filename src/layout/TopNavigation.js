@@ -72,19 +72,19 @@ const TopNavigation = () => {
                 
                 <div className="nav-text">
                     {isAuthenticated ? (
-                        <button className="nav-text" onClick={handleLogout}>로그아웃</button>
+                        <button className="nav-text nav-item" onClick={handleLogout}>로그아웃</button>
                     ) : (
-                        <a className="nav-text" href="/login">로그인</a>
+                        <a className="nav-item" href="/login">로그인</a>
                     )}
                 </div>
                 {isAuthenticated && userKey !== null && userKey !== undefined && (
                 <button className="nav-text mystore">
-                    <Link className="nav-text mystore" to={`/mystore/${userKey}`}>마이스토어</Link>
+                    <Link className="nav-text nav-item" to={`/mystore/${userKey}`}>마이스토어</Link>
                 </button>
                 )}
 
                 {isAuthenticated && userKey !== null && userKey !== undefined && (
-                <a className="nav-text" href="/purchase">구매관리</a>
+                <a className="nav-item" href="/purchase">구매관리</a>
                 )}
                 
             </div>
@@ -108,7 +108,7 @@ const TopNavigation = () => {
                             <img className="search-btn" src={Search_Image} alt="검색"/>
                         </a>
             </div>
-
+            
             
 
         </div>

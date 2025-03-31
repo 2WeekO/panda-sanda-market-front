@@ -7,6 +7,27 @@
 }
 
 @media (max-width:1000px) {
+
+    .top-nav{
+        margin: 0;
+    }
+    .middle-nav{
+        border: none;
+    }
+    .top-nav{
+        margin: 12px;
+    }
+    .top-nav .nav-item{
+        color: white;
+        background-color: black;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 8px;
+        margin: auto;
+        
+        
+    }
+
     .view-width{
         width: 100%;
     }

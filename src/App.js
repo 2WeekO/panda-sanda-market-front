@@ -13,7 +13,7 @@ import ProductDetail from './pages/ProductDetail';
 import SignUpPage from './pages/SignUp';
 import AccountPage from './pages/Account';
 import SearchResults from './pages/Component/SearchResults';
-
+import BottomNavigation from './layout/BottomNavigation';
 
 
 import './App.css';
@@ -53,6 +53,7 @@ const App = () => {
           <Route path='/signup' element={<SignUpPage/>}></Route> {/*회원가입*/}
             
           </Routes>
+          <BottomNavigation/>
       </BrowserRouter>
       
       
