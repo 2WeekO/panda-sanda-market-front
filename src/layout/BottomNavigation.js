@@ -1,11 +1,11 @@
 import React from "react";
 import "../CSS/BottomNavigationStyle.css";
 
-import home_icon from "./image/bottom_nav/home_icon.svg";
-import wallet_icon from "./image/bottom_nav/wallet_icon.svg"
-import product_icon from "./image/bottom_nav/product_icon.svg";
-import exchange_icon from "./image/bottom_nav/exchange_icon.svg";
-import user_icon from "./image/bottom_nav/user_icon.svg";
+import exchange_icon from "./image/nav/exchange_icon.svg";
+import home_icon from "./image/nav/home_icon.svg";
+import product_icon from "./image/nav/product_icon.svg";
+import user_icon from "./image/nav/user_icon.svg";
+import wallet_icon from "./image/nav/wallet_icon.svg";
 const BottomNavigation = () => {
 
 

@@ -17,28 +17,31 @@ function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address,
       <div className="product-text status">{status}</div>
       <div className="product-text transaction-method">{tradeMethod}{shippingMethod}</div>
       </div>
+      
       {/* 수정 & 삭제 버튼 */}
-      {showEditDeleteButtons && (
-        <div className="product-text product-buttons">
+    {showEditDeleteButtons && (
+        <div className="product-buttons">
           <button
-            className="product-text product-button edit"
+            className="product-button"
             onClick={(e) => {
               e.stopPropagation();
               onEdit(); // 수정 버튼 클릭 시 수정 페이지로 이동
             }}
           >
-            수정
+            수정하기
           </button>
           <button
-            className="product-text product-button delete"
+            className="product-button"
             onClick={(e) => { e.stopPropagation(); onDelete(); }} // 삭제 버튼 클릭 시 삭제 동작
           >
-            삭제
+            삭제하기
           </button>
         </div>
       )}
     </div>
+    
     </div>
+    
   );
 }
 

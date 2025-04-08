@@ -134,27 +134,21 @@
 
 .product-buttons{
     text-align: center;
-    
+    display: flex;
+
 }
 
 .product-button{
+    margin: 10px 10px 0 0;
     border: none;
-    width: 45%;
+    width: 120px;
     height: 36px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    font-size: 15px;
+}
 
-}
-.edit{
-    color: white;
-    font-size: 16px;
-    background-color: rgb(104, 104, 104);
-    border-radius: 10px 0 0 10px;
-}
-.delete{
-    color: white;
-    font-size: 16px;
-    background-color: black;
-    border-radius: 0 10px 10px 0;
-}
 .transaction-method{
     margin: 10px 0;
     width: 80px;

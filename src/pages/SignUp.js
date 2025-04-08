@@ -3,22 +3,55 @@ import React, { useState } from "react";
 import Logo_Image from './image/LOGO.png';
 
 const SignUpPage = () => {
-
     const API_URL = process.env.REACT_APP_API_URL;
-
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [nickname, setNickname] = useState("");
-    const [address, setAddress] = useState("");
-    const [addressDetail, setAddressDetail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordCheck, setPasswordCheck] = useState("");
     
-    const [agreeToTerms, setAgreeToTerms] = useState(false); // 개인정보 수집 동의 체크 추가
+    const steps = [
+        { key: "username", label: "이름", placeholder: "이름을 입력해주세요.", type: "text" },
+        { key: "nickname", label: "닉네임", placeholder: "닉네임을 입력해주세요.", type: "text" },
+        { key: "email", label: "이메일", placeholder: "이메일을 입력해주세요.", type: "email" },
+        { key: "address", label: "주소", placeholder: "주소를 입력해주세요. ex) -시 -구 -동", type: "text" },
+        { key: "addressDetail", label: "상세 주소", placeholder: "상세 주소를 입력해주세요.", type: "text" },
+        { key: "phoneNumber", label: "전화번호", placeholder: "-없이 전화번호를 입력해주세요.", type: "text" },
+        { key: "password", label: "비밀번호", placeholder: "비밀번호를 입력해주세요.", type: "password" },
+        { key: "passwordCheck", label: "비밀번호 확인", placeholder: "확인을 위해 비밀번호를 입력해주세요.", type: "password" }
+    ];
+
+    const [formData, setFormData] = useState({
+        username: "",
+        nickname: "",
+        email: "",
+        address: "",
+        addressDetail: "",
+        phoneNumber: "",
+        password: "",
+        passwordCheck: ""
+    });
+
+    const [currentStep, setCurrentStep] = useState(0);
+    const [agreeToTerms, setAgreeToTerms] = useState(false);
+
+    const handleNext = () => {
+        if (!formData[steps[currentStep].key]) {
+            alert("입력값을 확인해주세요.");
+            return;
+        }
+
+        if (currentStep < steps.length - 1) {
+            setCurrentStep(currentStep + 1);
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleNext();
+        }
+    };
 
     const controllerSignUp = async () => {
-        if (!email || !username || !nickname || !address || !phoneNumber || !password || !passwordCheck) {
+        const { password, passwordCheck, ...rest } = formData;
+
+        const isEmptyField = Object.values(formData).some(value => value.trim() === "");
+        if (isEmptyField) {
             alert("모든 필수 입력란에 입력해주세요.");
             return;
         }
@@ -33,157 +66,63 @@ const SignUpPage = () => {
             return;
         }
 
-        const data = {
-            email,
-            username,
-            nickname,
-            address,
-            addressDetail,
-            phoneNumber,
-            password,
-            passwordCheck,
-        };
-
-        
-
         try {
-            const res = await axios.post(`${API_URL}/api/auth/signup`, data, {
+            const res = await axios.post(`${API_URL}/api/auth/signup`, formData, {
                 headers: {
-                    "Content-Type": "application/json", // JSON 데이터 형식
-                    "Accept": "application/json", // 서버로부터 받을 데이터 형식
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
                 },
             });
-            console.log(res);
             alert("회원가입 성공!");
             window.location.href = "/";
-            // 성공 시 입력 필드 초기화
-            setEmail("");
-            setUsername("");
-            setNickname("");
-            setAddress("");
-            setAddressDetail("");
-            setPhoneNumber("");
-            setPassword("");
-            setPasswordCheck("");
         } catch (err) {
-            console.error(err.response);
-            // 서버에서 반환하는 에러 메시지 출력
-            alert(err.response?.data?.message || err );
-            
-
+            alert(err.response?.data?.message || err);
         }
     };
 
     return (
-        <>
-            <div className="sign-view">
-                <div className="sign-layout">
-                    <a className="logo" href="/"><img src={Logo_Image}></img></a>
-                    <div className="sign-title">회원가입</div>
+        <div className="sign-view">
+            <div className="sign-layout">
+                <a className="logo" href="/"><img src={Logo_Image} alt="logo" /></a>
+                <div className="sign-title">회원가입</div>
 
-                    <div className="input-box">
-                        <div className="sign-text">이름</div>
+                {steps.slice(0, currentStep + 1).map((step, index) => (
+                    <div className="input-box" key={step.key}>
+                        <div className="sign-text">{step.label}</div>
                         <input
-                            placeholder="이름을 입력해주세요."
                             className="sign-input"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            type={step.type}
+                            placeholder={step.placeholder}
+                            value={formData[step.key]}
+                            onChange={(e) =>
+                                setFormData({ ...formData, [step.key]: e.target.value })
+                            }
+                            onKeyDown={index === currentStep ? handleKeyDown : undefined}
+                            autoFocus={index === currentStep}
                         />
+                        {index === currentStep && currentStep < steps.length - 1 && (
+                            <button className="next-btn" onClick={handleNext}>다음</button>
+                        )}
                     </div>
+                ))}
 
-                    <div className="input-box">
-                        <div className="sign-text">닉네임</div>
-                        <input
-                            placeholder="닉네임을 입력해주세요."
-                            className="sign-input"
-                            type="text"
-                            value={nickname}
-                            onChange={(e) => setNickname(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-box">
-                        <div className="sign-text">이메일</div>
-                        <input
-                            placeholder="이메일을 입력해주세요."
-                            className="sign-input"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-box">
-                        <div className="sign-text">주소</div>
-                        <input
-                            placeholder="주소를 입력해주세요. ex) -시 -구 -동"
-                            className="sign-input"
-                            type="text"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-box">
-                        <div className="sign-text">상세 주소</div>
-                        <input
-                            placeholder="상세 주소를 입력해주세요."
-                            className="sign-input"
-                            type="text"
-                            value={addressDetail}
-                            onChange={(e) => setAddressDetail(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-box">
-                        <div className="sign-text">전화번호</div>
-                        <input
-                            placeholder="-없이 전화번호를 입력해주세요."
-                            className="sign-input"
-                            type="text"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-box">
-                        <div className="sign-text">비밀번호</div>
-                        <input
-                            placeholder="비밀번호를 입력해주세요."
-                            className="sign-input"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-box">
-                        <div className="sign-text">비밀번호 확인</div>
-                        <input
-                            placeholder="확인을 위해 비밀번호를 입력해주세요."
-                            className="sign-input"
-                            type="password"
-                            value={passwordCheck}
-                            onChange={(e) => setPasswordCheck(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
-                        <input
-                            type="checkbox"
-                            checked={agreeToTerms}
-                            onChange={() => setAgreeToTerms(!agreeToTerms)}
-                        />
-                        개인정보 수집 및 이용 동의 *
-                    </div>
-
-                    <button className="submit-btn" type="button" onClick={controllerSignUp}>
-                        { "가입하기"}
-                    </button>
-                </div>
+                {currentStep === steps.length - 1 && (
+                    <>
+                        <div className="input-box">
+                            <input
+                                type="checkbox"
+                                checked={agreeToTerms}
+                                onChange={() => setAgreeToTerms(!agreeToTerms)}
+                            />
+                            개인정보 수집 및 이용 동의 *
+                        </div>
+                        <button className="submit-btn" type="button" onClick={controllerSignUp}>
+                            가입하기
+                        </button>
+                    </>
+                )}
             </div>
-        </>
+        </div>
     );
 };
 

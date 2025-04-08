@@ -1,7 +1,6 @@
 
 @media (max-width: 1000px) {
   
-
   .logo-img{
     display: none;
   }
@@ -12,31 +11,9 @@
   .nav-center{
     display: flex;
     justify-content: center;
-    background-color: rgba(240, 240, 240, 0.87);
-    padding: 0 15px;
-    border-radius: 0 0 25px 25px;
-  }
-
-  .search-box{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-  }
-
-  .search-input{
-    border-width: 1px;
-    font-weight: bolder;
-  }
-  .search-input::placeholder{
-    color: black;
-  }
-
-  .header-content{
-    background-color: transparent;
   }
 
   .category-box{
-    
     display: flex;
   }
   .category-box button{
@@ -68,13 +45,15 @@
 }
 
 .header-content {
-  width: 100%;
+  width: 500px;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  justify-content: space-around;
+  border-radius: 0 0 20px 20px;
+  
+  
 }
 
 
@@ -84,7 +63,6 @@
 }
 
 .nav {
-
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -104,9 +82,7 @@
   color: black;
 }
 
-.search-bar {
-  display: flex;
-}
+
 
 
 

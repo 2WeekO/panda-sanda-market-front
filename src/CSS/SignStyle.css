@@ -1,7 +1,6 @@
 .sign-view{
   display: flex;
   justify-content: center;
-  
 }
 .sign-layout{
   text-align: center;
@@ -17,7 +16,6 @@
   display: block;
   width: 380px;
   margin: 10px;
-  
 }
 .sign-text{
   text-align: left;
@@ -65,4 +63,14 @@
   font-size: 16px;
   padding-left: 10px;
   margin: 8px 0;
+}
+
+.next-btn{
+  margin-top: 10px;
+  border: none;
+  font-size: 18px;
+  width: auto;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bolder;
 }
