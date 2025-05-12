@@ -18,6 +18,7 @@
   gap: 50px;
   margin-bottom: 20px;
   justify-content: center;
+  
 }
 
 /* 버튼 기본 스타일 */
@@ -34,25 +35,24 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 버튼에 그림자 */
 }
 
-/* 선택된 버튼(active) 스타일 */
+
 .page-button.active {
-  background-color: rgb(0, 187, 125); /* 선택된 버튼은 빨간색과 오렌지 그라데이션 */
-  transform: scale(1.1); /* 선택된 버튼 크기 확대 */
+  background-color: rgb(0, 187, 125);
+  transform: scale(1.1);
 }
 
-/* 버튼 호버 시 스타일 */
 .page-button:hover {
-  background-color: rgb(0, 187, 125); /* 파란색과 녹색 그라데이션 */
-  transform: translateY(-5px); /* 버튼 위로 올려주는 효과 */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 강조 */
+  background-color: rgb(0, 187, 125);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* 버튼 클릭 시 약간의 효과 */
+
 .page-button:active {
-  transform: translateY(2px); /* 클릭하면 버튼이 살짝 눌리는 효과 */
+  transform: translateY(2px); 
 }
 
-/* 내용 컨테이너 */
+
 .content-container {
   margin-top: 30px;
   padding: 30px;
@@ -63,7 +63,7 @@
   text-align: center;
 }
 
-/* 작은 반짝이는 효과 */
+
 .page-button:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
@@ -71,17 +71,17 @@
 
 /* ------------------------구매 신청 목록 CSS -------------------------------*/
 .management-page {
-  color: #000000;
+  color: white;
   padding: 20px;
   border-radius: 10px;
 }
 
 .tip-message {
   margin-top: 20px;
-  background: rgba(255, 0, 0, 0.2);
+  background: rgba(90, 142, 255, 0.151);
   padding: 10px;
   border-radius: 5px;
-  color: #ff5555;
+  color: #b6b6b6;
 }
 
 

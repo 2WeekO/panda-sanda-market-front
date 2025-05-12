@@ -1,6 +1,7 @@
 .account-page{
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 .account-box{
@@ -10,21 +11,38 @@
   width: 500px;
 }
 .account-box div{
+  padding: 15px;
+  color: white;
+  background-color: #252525;
+  border-radius: 10px;
   font-size: 1.2rem;
   margin: 20px;
 }
 
+
+
+.account-box div p{
+  background-color: #1a1a1a;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
 .account-input input{
-  width: 15rem;
+  width: 60%;
   height: 1.5rem;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
   font-size: 18px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border: none;
+  color: white;
 }
 
 .account-box button{
   margin: 20px;
-  width: 10rem;
+  width: 130px;
   height: 3rem;
   border: none;
   font-size: 1.2rem;

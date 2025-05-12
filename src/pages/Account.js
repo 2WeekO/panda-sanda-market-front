@@ -115,6 +115,8 @@ const AccountPage = () => {
             ) : (
                 <div className='account-input'>
                     <h2>{account ? '계좌 수정' : '계좌 등록'}</h2>
+                    <div>
+                    <strong>은행이름</strong>
                     <input
                         
                         type="text"
@@ -122,6 +124,9 @@ const AccountPage = () => {
                         value={accountData.bankName}
                         onChange={(e) => setAccountData({ ...accountData, bankName: e.target.value })}
                     />
+                    </div>
+                    <div>
+                    <strong>계좌번호</strong>
                     <input
                         
                         type="text"
@@ -129,6 +134,10 @@ const AccountPage = () => {
                         value={accountData.accountNumber}
                         onChange={(e) => setAccountData({ ...accountData, accountNumber: e.target.value })}
                     />
+                    </div>
+
+                    <div>
+                    <strong>소유주명</strong>
                     <input
                         type="text"
         
@@ -137,6 +146,8 @@ const AccountPage = () => {
                         onChange={(e) => setAccountData({ ...accountData, holderName: e.target.value })}
                         onKeyDown={(e) => {if (e.key === "Enter") {handleSave();}}}
                     />
+
+                    </div>
                     <button onClick={handleSave}>{account ? '수정 완료' : '등록하기'}</button>
                     <button onClick={() => setIsEditing(false)}>취소</button>
                 </div>

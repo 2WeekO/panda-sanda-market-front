@@ -82,7 +82,9 @@ function Main() {
                 price={`${formatPrice(product.price)}`}
                 address={product.userAddress || "지역 정보 없음"}
                 status={`${product.productCondition}`}
+                productStatus={product.status}
                 productId={product.itemKey}
+                
               />
             </Link>
           ))

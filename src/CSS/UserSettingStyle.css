@@ -1,0 +1,50 @@
+.user-setting{
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.user-setting div {
+  display: grid;
+  width: 600px;
+  background-color: #202020;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 0 30px;
+  text-align: center;
+}
+
+.user-setting div p{
+  padding: 10px;
+  margin: 10px;
+  background-color: #181818;
+  border-radius: 15px;
+}
+
+.user-setting input{
+  width: 150px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.user-setting button{
+  border: none;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.user-setting button:hover{
+  background-color: #8d8d8d;
+  
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bolder;
+}

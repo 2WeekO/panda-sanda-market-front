@@ -78,9 +78,10 @@ const ProductDetail = () => {
             <p>{product.description}</p>
           </div>
           <div className='view-box'>
-            <p>🏪{product.userNickname || "닉네임 정보 없음"}</p>
-            <div className="views">조회 {product.viewCount || 0} | 찜 {product.wishCount || 0} | 좋아요 {product.likeCount || 0}</div>
+            <p>닉네임: {product.userNickname}</p>
+            <div className="views">조회 {product.viewCount || 0}</div>
           </div>
+          {/* | 찜 {product.wishCount || 0} | 좋아요 {product.likeCount || 0 */}
           
 
           <div className="actions">

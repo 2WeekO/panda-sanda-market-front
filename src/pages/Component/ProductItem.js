@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address, status, showEditDeleteButtons, onDelete , onEdit }) {
+function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address, status, productStatus, showEditDeleteButtons, onDelete , onEdit }) {
 
   return (
     <div className="product">
@@ -15,7 +15,11 @@ function ProductItem({ imgSrc, title,tradeMethod,shippingMethod, price, address,
 
       <div className="display-flex">
       <div className="product-text status">{status}</div>
+      
+      <div className="display-between">
       <div className="product-text transaction-method">{tradeMethod}{shippingMethod}</div>
+      <div className="product-text product-status">{productStatus}</div>
+      </div>
       </div>
       
       {/* 수정 & 삭제 버튼 */}

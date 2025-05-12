@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo_Image from './image/LOGO.png';
+import Logo_Image from './image/LOGO.svg';
 import Search_Image from './image/search_icon.svg';
 
 const Header = () => {

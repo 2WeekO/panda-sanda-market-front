@@ -87,6 +87,7 @@
 }
 
 .product-view{
+    color: white;
     font-size: 20px;
     font-weight: bold;
     display: flex;
@@ -103,7 +104,7 @@
 .product{
     cursor: pointer;
     text-decoration: none;
-    color: black;
+    color: white;
     border-radius: 20px;
     display: block;
     margin: 10px;
@@ -165,18 +166,19 @@
     width: auto;
     max-width: 260px;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .price{
     font-weight: bolder;
-    font-size: 18px;
+    font-size: 1.3rem;
+    
 }
 .address{
     font-weight: bolder;
     margin: 10px 0;
     width: auto;
-    color: rgb(68, 68, 68);
+    color: #dbdbdb;
     font-size: 16px;
     padding: 3px;
     border-radius: 12px;
@@ -184,11 +186,20 @@
 }
 .status{
     margin: 3px 0;
-    width: 90px;
-    background-color: rgb(0, 162, 255);
+    width: fit-content;
+    background-color: #252525;
     color: white;
     font-size: 16px;
     text-align: center;
-    padding: 4px;
+    padding: 3px 10px;
     border-radius: 8px;
+}
+.product-status{
+    color: #b3b3b3;
+    font-size: 13px;
+}
+
+.display-between{
+    display: flex;
+    justify-content: space-between;
 }

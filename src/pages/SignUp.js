@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import Logo_Image from './image/LOGO.png';
+import Logo_Image from './image/LOGO.svg';
 
 const SignUpPage = () => {
     const API_URL = process.env.REACT_APP_API_URL;

@@ -12,7 +12,7 @@ import signup_icon from "./image/nav/signup_icon.svg";
 import login_icon from "./image/nav/login_icon.svg";
 import logout_icon from "./image/nav/logout_icon.svg";
 import mystore_icon from "./image/nav/mystore_icon.svg";
-
+import home_icon from "./image/nav/home_icon.svg";
 
 
 const SideNavigation = () => {
@@ -63,18 +63,21 @@ const SideNavigation = () => {
   <div>
   
     <div className="side-nav">
+      
+
       {isAuthenticated ? (<></>):(<li className="sign"><a href="/signup"><img src={signup_icon} alt="회원가입" /></a>회원가입</li>)}
       {isAuthenticated ?  (<li className="sign"><a onClick={handleLogout}><img src={logout_icon} alt="로그아웃" /></a>로그아웃</li>) :
                           (<li className="sign"><a href="/login"><img src={login_icon} alt="로그인" /></a>로그인</li>)
         }
-
-      <li><a href="/account"><img src={wallet_icon} alt="계좌" /></a>계좌</li>
+      <li><a href="/"><img src={home_icon} alt="" /></a>홈</li>
       <li className="product_icon"><a href="/product"><img src={product_icon} alt="상품 등록" /></a>상품 등록</li>
+      <li><a href="/account"><img src={wallet_icon} alt="계좌" /></a>계좌</li>
       <li><a href="/purchase"><img src={exchange_icon} alt="" /></a>구매&판매</li>
-      <li> <a href="/user"><img src={user_icon} alt="유저 정보" /></a>유저정보</li>
       {isAuthenticated && userKey !== null && userKey !== undefined &&
         (<li><Link to={`/mystore/${userKey}`}><img src={mystore_icon} alt="마이스토어" /></Link>마이스토어</li>)
       }
+      <li> <a href="/user"><img src={user_icon} alt="유저 정보" /></a>유저정보</li>
+      
     </div>
   
     </div>)

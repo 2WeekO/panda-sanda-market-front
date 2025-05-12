@@ -4,7 +4,7 @@
 
 body{
   overflow-x: hidden;
-
+  background-color: #121212;
 }
 
 @media (max-width: 1000px) {
@@ -17,19 +17,11 @@ body{
 
 .full-screen{
   display: flex;
-  background-color: aqua;
   justify-content: center;
   height: 240px;
 }
 
-.logo{
-  color: black;
-  font-size: 42px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-weight: bolder;
-  text-decoration: none;
-  text-decoration-color: none;
-}
+
 
 .lay-out{
   width: 100%;
@@ -73,7 +65,7 @@ body{
 }
 
 .nav-text{
-  color: black;
+  color: white;
   text-decoration-color: none;
   text-decoration: none;
   margin: 0 10px;
@@ -104,6 +96,7 @@ body{
 }
 
 .search-box{
+
   justify-content: center;
   position: relative;
   text-align: center;
@@ -112,18 +105,19 @@ body{
 }
 
 .search-input{
+  color: white;
   width: 320px;
   height: 36px;
   border-radius: 12px;
   border-style: none;
   text-align: center;
   font-size: large;
-  background-color: transparent;
   padding: 5px;
-  background-color: rgba(243, 243, 243, 0.9);
+  background-color: #252525;
 }
 
 .search-box button{
+  
   background-color: transparent;
   display: flex;
   justify-content: center;
@@ -136,6 +130,8 @@ body{
   border: none;
   cursor: pointer;
 }
+
+
 
 .text-center{
   text-align: center;
@@ -156,7 +152,7 @@ body{
   height: auto;
   padding: 10px;
   border-radius: 10px;
-  background-color:rgb(0, 0, 0);
+  background-color:#252525;
   border-width: 2px;
   color: white;
   transition-duration: 0.5s;
@@ -166,7 +162,7 @@ body{
 .category-box button:hover{
   font-size: 15px;
   font-weight: bolder;
-  border: solid 2px;
+  
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
   color: black;

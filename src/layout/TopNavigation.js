@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Link 컴포넌트 가져오기
-import Logo_Image from './image/LOGO.png';
 import Search_Image from './image/search_icon.svg';
 
 const TopNavigation = () => {
@@ -20,15 +19,12 @@ const TopNavigation = () => {
     
     return (
         <div>
-            <div className="middle-nav">
-                <a className="logo" href="/"><img src={Logo_Image} alt=""/></a>
-            </div>
-            <hr></hr>
+            
             <div className="search-box">
                 <input
                     className="search-input"
                     type="text"
-                    placeholder="상품 검색"
+                    placeholder="검색어를 입력해주세요."
                     value={searchKeyword}
                     onChange={(e) => setSearchKeyword(e.target.value)}
                     onKeyDown={(e) => {if (e.key === "Enter") {handleSearch();}}}
